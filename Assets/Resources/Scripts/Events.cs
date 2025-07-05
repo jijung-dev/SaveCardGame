@@ -1,16 +1,21 @@
-using UnityEngine;
+using System;
 
-public class Events : MonoBehaviour
+public static class Events
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public static Action<BattleData> OnBattleInit;
+    public static Action<BattleData> OnBattleStart;
+    public static Action<BattleData> OnBattleEnd;
 
-    // Update is called once per frame
-    void Update()
+    public static void InvokeOnBattleInit(BattleData data)
     {
-        
+        OnBattleInit?.Invoke(data);
+    }
+    public static void InvokeOnBattleStart(BattleData data)
+    {
+        OnBattleStart?.Invoke(data);
+    }
+    public static void InvokeOnBattleEnd(BattleData data)
+    {
+        OnBattleEnd?.Invoke(data);
     }
 }
