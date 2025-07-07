@@ -8,6 +8,7 @@ public class BattleSystem : MonoBehaviour
     private EntitySpawner entitySpawner;
     [SerializeField]
     private Deck deck;
+    [SerializeField]
     private BattleData _data;
     public bool isActive => _data != null;
     void Awake()
@@ -19,6 +20,7 @@ public class BattleSystem : MonoBehaviour
 
     void BattleSetUp()
     {
+        if (_data is null) { DebugExt.LogError("No Battle Data found", this); return; }
         Events.InvokeOnBattleInit(_data);
 
         //Tile Spawns
@@ -29,6 +31,7 @@ public class BattleSystem : MonoBehaviour
         entitySpawner.Spawn(_data.allyWave);
 
         //Populate Deck
+        deck.Populate();
         deck.Draw();
     }
     void BattleStart()
@@ -40,7 +43,7 @@ public class BattleSystem : MonoBehaviour
         Events.InvokeOnBattleEnd(_data);
 
         //Check Win or Lose
-        
+
         //Go to Map
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardContainer : MonoBehaviour
@@ -7,9 +8,22 @@ public class CardContainer : MonoBehaviour
 
     public virtual void Add(params Card[] cards)
     {
+        foreach (var item in cards)
+        {
+            item.transform.SetParent(transform);
+        }
         _cards.AddRange(cards);
     }
     public virtual Card Pull()
+    {
+        if (_cards.Count <= 0)
+            return null;
+            
+        var card = _cards.First();
+        _cards.Remove(card);
+        return card;
+    }
+    public virtual Card PullRandom()
     {
         if (_cards.Count <= 0)
             return null;
