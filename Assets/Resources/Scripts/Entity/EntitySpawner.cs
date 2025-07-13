@@ -13,7 +13,7 @@ public class EntitySpawner : MonoBehaviour
             var ranPos = possiblePosition.RandomItem();
             var ranEntity = possibleEntity.RandomItem();
             
-            var entity = Instantiate(data.baseObject, ranPos, Quaternion.identity, transform).GetComponent<Entity>();
+            var entity = Instantiate(data.baseObject, (Vector3Int)ranPos, Quaternion.identity, transform).GetComponent<Entity>();
             entity.data = ranEntity;
             possiblePosition.Remove(ranPos);
         }

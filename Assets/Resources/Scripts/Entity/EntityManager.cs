@@ -10,19 +10,24 @@ public class EntityManager
     {
         return _entities.Any(r => r.container == tile);
     }
+    public static bool TryGetEntity(GameTile tile, out Entity entity)
+    {
+        entity = GetEntity(tile);
+        return HasEntity(tile);
+    }
 
     public static Entity GetEntity(GameTile tile)
     {
         var entity = _entities.FirstOrDefault(r => r.container == tile);
 
-        if (entity == null)
-        {
-            DebugExt.Log(
-                $"Getting entity from {tile.celPosition} failed. Entity at {tile.celPosition} doesn't exist",
-                nameof(EntityManager),
-                LogType.Error
-            );
-        }
+        // if (entity == null)
+        // {
+        //     DebugExt.Log(
+        //         $"Getting entity from {tile.celPosition} failed. Entity at {tile.celPosition} doesn't exist",
+        //         nameof(EntityManager),
+        //         LogType.Error
+        //     );
+        // }
 
         return entity;
     }

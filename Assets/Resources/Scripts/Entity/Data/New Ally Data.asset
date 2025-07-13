@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85bba72dea827e4bab7a716d98c1b0e, type: 3}
   m_Name: New Ally Data
   m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 462fa468dabb70249a824299729bbd76, type: 2}
+  - {fileID: 11400000, guid: 462fa468dabb70249a824299729bbd76, type: 2}
+  - {fileID: 11400000, guid: 462fa468dabb70249a824299729bbd76, type: 2}

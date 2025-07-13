@@ -14,34 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardSize: {x: 7, y: 7}
   enemyWave:
-    baseObject: {fileID: 1732447704063933988, guid: df21a979b6d30b64eae3dbd5bd3f8236, type: 3}
-    spawnCount: 2
-    possibleEntity:
-    - {fileID: 11400000, guid: d3f272e503767894ca6be540ebc693b1, type: 2}
-    possiblePosition:
-    - {x: -2, y: -1, z: 0}
-    - {x: -1, y: -1, z: 0}
-    - {x: 0, y: -1, z: 0}
-    - {x: 1, y: -1, z: 0}
-    - {x: 2, y: -1, z: 0}
-    - {x: -2, y: -2, z: 0}
-    - {x: -1, y: -2, z: 0}
-    - {x: 0, y: -2, z: 0}
-    - {x: 1, y: -2, z: 0}
-    - {x: 2, y: -2, z: 0}
-  allyWave:
-    baseObject: {fileID: 7863363281012384837, guid: e1318ad333141714cbb6a84244079fd7, type: 3}
-    spawnCount: 2
+    baseObject: {fileID: 7022307776402844720, guid: a2afbfc4a7be5d64bb629c9e4ea541ce, type: 3}
+    spawnCount: 0
     possibleEntity:
     - {fileID: 11400000, guid: 9639b3012eb9ee947a1345f607b35c2a, type: 2}
     possiblePosition:
-    - {x: -2, y: 1, z: 0}
-    - {x: -1, y: 1, z: 0}
-    - {x: 0, y: 1, z: 0}
-    - {x: 1, y: 1, z: 0}
-    - {x: 2, y: 1, z: 0}
-    - {x: -2, y: 2, z: 0}
-    - {x: -1, y: 2, z: 0}
-    - {x: 0, y: 2, z: 0}
-    - {x: 1, y: 2, z: 0}
-    - {x: 2, y: 2, z: 0}
+    - {x: -2, y: -1}
+    - {x: -1, y: -1}
+    - {x: 0, y: -1}
+    - {x: 1, y: -1}
+    - {x: 2, y: -1}
+    - {x: -2, y: -2}
+    - {x: -1, y: -2}
+    - {x: 0, y: -2}
+    - {x: 1, y: -2}
+    - {x: 2, y: -2}
+  allyWave:
+    baseObject: {fileID: 7022307776402844720, guid: a2afbfc4a7be5d64bb629c9e4ea541ce, type: 3}
+    spawnCount: 1
+    possibleEntity:
+    - {fileID: 11400000, guid: 9639b3012eb9ee947a1345f607b35c2a, type: 2}
+    possiblePosition:
+    - {x: -2, y: 1}
+    - {x: -1, y: 1}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    - {x: 2, y: 1}
+    - {x: -2, y: 2}
+    - {x: -1, y: 2}
+    - {x: 0, y: 2}
+    - {x: 1, y: 2}
+    - {x: 2, y: 2}

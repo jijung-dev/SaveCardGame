@@ -50,9 +50,13 @@ public static class DebugExt
 
 public static class VectorExt
 {
-    public static Vector3Int FloorToInt(this Vector3 vector)
+    public static Vector3Int RoundToInt(this Vector3 vector)
     {
-        return new Vector3Int(Mathf.FloorToInt(vector.x), Mathf.FloorToInt(vector.y), Mathf.FloorToInt(vector.z));
+        return Vector3Int.RoundToInt(vector);
+    }
+    public static Vector2Int RoundToInt(this Vector2 vector)
+    {
+        return Vector2Int.RoundToInt(vector);
     }
 }
 
@@ -117,3 +121,21 @@ public class Scriptable<T>
         return result;
     }
 }
+public class MonoBehaviourSingleton<T> : MonoBehaviour
+    where T : MonoBehaviour
+{
+    public static T instance { get; private set; }
+
+    protected virtual void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this as T;
+        }
+        else
+        {
+            DestroyImmediate(this);
+        }
+    }
+}
+

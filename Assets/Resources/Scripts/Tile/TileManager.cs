@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class TileManager
 {
-    private static Dictionary<Vector3Int, GameTile> _tiles = new Dictionary<Vector3Int, GameTile>();
+    private static Dictionary<Vector2Int, GameTile> _tiles = new Dictionary<Vector2Int, GameTile>();
 
-    public static bool HasTile(Vector3Int pos)
+    public static bool HasTile(Vector2Int pos)
     {
         return _tiles.ContainsKey(pos);
     }
 
-    public static GameTile GetTile(Vector3Int pos)
+    public static GameTile GetTile(Vector2Int pos)
     {
         if (!_tiles.ContainsKey(pos))
         {
