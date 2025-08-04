@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//FIXME: Delete this
 public class AreaSpot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // private AreaSelector _selector;
@@ -20,6 +21,6 @@ public class AreaSpot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-       // _selector.Hover(null);
+        // _selector.Hover(null);
     }
 }

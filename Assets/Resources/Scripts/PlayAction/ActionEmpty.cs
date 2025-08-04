@@ -4,9 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Test", menuName = "Action")]
 public class ActionEmpty : PlayActionData
 {
-	public override IEnumerator Run()
+	public override IEnumerator Run(Vector2Int center)
 	{
-		Debug.Log("Lmao");
+		Debug.Log($"Lmao at {center}");
 		yield return null;
 	}
 }

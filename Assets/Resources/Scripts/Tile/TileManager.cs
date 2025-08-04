@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public class TileManager
 {
     private static Dictionary<Vector2Int, GameTile> _tiles = new Dictionary<Vector2Int, GameTile>();
+    public static ReadOnlyDictionary<Vector2Int, GameTile> tiles = new ReadOnlyDictionary<Vector2Int, GameTile>(_tiles);
 
     public static bool HasTile(Vector2Int pos)
     {

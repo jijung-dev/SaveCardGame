@@ -7,8 +7,6 @@ public class BattleSystem : MonoBehaviour
     [SerializeField]
     private EntitySpawner entitySpawner;
     [SerializeField]
-    private Deck deck;
-    [SerializeField]
     private BattleData _data;
     public bool isActive => _data != null;
     void Awake()
@@ -31,8 +29,8 @@ public class BattleSystem : MonoBehaviour
         entitySpawner.Spawn(_data.allyWave);
 
         //Populate Deck
-        deck.Populate();
-        deck.Draw();
+        Reference.deck.Populate();
+        Reference.deck.Draw();
     }
     void BattleStart()
     {

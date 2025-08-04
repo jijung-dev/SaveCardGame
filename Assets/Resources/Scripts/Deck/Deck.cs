@@ -35,4 +35,9 @@ public class Deck : CardContainer
             handPile.Add(drawPile.Pull());
         }
     }
+    public void Discard(Card card)
+    {
+        handPile.Remove(card);
+        discardPile.Add(card);
+    }
 }

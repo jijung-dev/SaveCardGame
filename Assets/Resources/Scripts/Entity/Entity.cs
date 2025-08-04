@@ -20,10 +20,11 @@ public class Entity : MonoBehaviour
 
 		SetUp();
 	}
-	public void SetUp()
+	public virtual void SetUp()
 	{
 		foreach (var item in data.actions)
 		{
+			item.owner = this;
 			var button = Instantiate(actionButton, layout.transform).GetComponent<Button>();
 			button.onClick.AddListener(() => SelectAction(item));
 		}
@@ -33,7 +34,7 @@ public class Entity : MonoBehaviour
 	{
 		if (action.instant)
 		{
-			//Add Run() to ActionQueue
+			ActionQueue.Stack(action, Vector2Int.one * 10000);
 			return;
 		}
 

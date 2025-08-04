@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ext { }
 
@@ -99,6 +100,14 @@ public static class ArrayExt
         var list = array.ToList();
         list.Remove(item);
         return list.ToArray();
+    }
+}
+public static class LayoutExt
+{
+    public static void Rebuild(this HorizontalLayoutGroup layout)
+    {
+        layout.enabled = false;
+        layout.enabled = true;
     }
 }
 

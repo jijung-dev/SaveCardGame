@@ -7,6 +7,7 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
     {
         Entity,
         Action,
+        Card,
         None
     }
     [SerializeField]
@@ -38,22 +39,8 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
         }
     }
 
-    //TEST: 
-    [SerializeField]
-    private Transform knob;
-    //
-
     void Update()
     {
-        if (hoverTile != null)
-            knob.position = (Vector3Int)hoverTile.Value;
-        else
-        {
-            Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
-            knob.position = mouseWorldPos;
-        }
-
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             HandleClick();
@@ -64,8 +51,8 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
             hoverSpawner.Despawn();
             return;
         }
-        //When enter doesn't update
 
+        //FIXME: When enter doesn't update
         if (hoverSpawner.IsDifferentCenter(hoverTile.Value))
         {
             hoverSpawner.SetArea(_currentAction.hoverArea, hoverTile.Value);
@@ -81,6 +68,7 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
         spawner.SetArea(action.area, center);
         spawner.promptUpdate = true;
 
+
         _hoverPhase = HoverPhase.Action;
     }
 
@@ -88,8 +76,7 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
     {
         if (hoverTile == null)
         {
-            UnSelectEntity();
-            UnSelectAction();
+            UnSelectAll();
             return;
         }
 
@@ -121,10 +108,16 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
         _currentAction = null;
         _hoverPhase = HoverPhase.Entity;
     }
+    void UnSelectAll()
+    {
+        UnSelectEntity();
+        UnSelectAction();
+        Reference.player.UnSelectCard();
+    }
     void EntityProcessClick()
     {
-        //Glitch when click too close
-        UnSelectEntity();
+        //FIXME: Glitch when click too close
+        UnSelectAll();
         if (EntityManager.TryGetEntity(hoverTile, out Entity entity))
         {
             DebugExt.Log($"Select Entity: {entity.name}", this);
@@ -134,7 +127,16 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
     }
     void ActionProcessClick()
     {
-        UnSelectAction();
-        //Put Action.Run in ActionQueue
+        if (spawner.HasTile(hoverTile.Value))
+        {
+            ActionQueue.Stack(_currentAction, hoverTile.Value);
+        }
+        
+        if (_currentAction.owner is Player player)
+        {
+            player.Discard();
+        }
+
+        UnSelectAll();
     }
 }

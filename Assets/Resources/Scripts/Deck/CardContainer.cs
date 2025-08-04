@@ -11,6 +11,7 @@ public class CardContainer : MonoBehaviour
         foreach (var item in cards)
         {
             item.transform.SetParent(transform);
+            item.transform.position = transform.position;
         }
         _cards.AddRange(cards);
     }
