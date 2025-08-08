@@ -17,7 +17,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     private Canvas canvas;
     //
 
-    void Awake()
+    void Start()
     {
         //Set up Canvas here
         _data.action.owner = Reference.player;

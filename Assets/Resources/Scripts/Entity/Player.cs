@@ -32,4 +32,14 @@ public class Player : Entity
 	{
 
 	}
+
+	public override void Select()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public override void UnSelect()
+	{
+		throw new System.NotImplementedException();
+	}
 }

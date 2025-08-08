@@ -5,10 +5,9 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
 {
     public enum HoverPhase
     {
-        Entity,
+        None,
+        Idle,
         Action,
-        Card,
-        None
     }
     [SerializeField]
     private AreaSpawner spawner;
@@ -17,7 +16,7 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
     private PlayActionData _currentAction;
     private Entity _currentEntity;
 
-    private HoverPhase _hoverPhase = HoverPhase.Entity;
+    private HoverPhase _hoverPhase = HoverPhase.Idle;
     public Vector2Int? hoverTile
     {
         get
@@ -43,6 +42,7 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            //FIXME: Can click entity through action button
             HandleClick();
         }
 
@@ -82,7 +82,7 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
 
         switch (_hoverPhase)
         {
-            case HoverPhase.Entity:
+            case HoverPhase.Idle:
                 EntityProcessClick();
                 break;
             case HoverPhase.Action:
@@ -98,7 +98,7 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
 
         _currentEntity.UnSelect();
         _currentEntity = null;
-        _hoverPhase = HoverPhase.Entity;
+        _hoverPhase = HoverPhase.Idle;
     }
     void UnSelectAction()
     {
@@ -106,7 +106,7 @@ public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
 
         spawner.Clear();
         _currentAction = null;
-        _hoverPhase = HoverPhase.Entity;
+        _hoverPhase = HoverPhase.Idle;
     }
     void UnSelectAll()
     {

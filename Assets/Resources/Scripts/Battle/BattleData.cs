@@ -6,5 +6,5 @@ public class BattleData : ScriptableObject
 {
     public Vector2Int boardSize;
     public EntityWaveData enemyWave;
-    public EntityWaveData allyWave;
+    public Vector2Int[] allySpawnable;
 }

@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+	public override void Select()
+	{
+		throw new System.NotImplementedException();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public override void SetUp()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public override void UnSelect()
+	{
+		throw new System.NotImplementedException();
+	}
 }

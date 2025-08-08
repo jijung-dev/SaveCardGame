@@ -5,15 +5,16 @@ public class BattleSystem : MonoBehaviour
     [SerializeField]
     private TileSpawner tileSpawner;
     [SerializeField]
-    private EntitySpawner entitySpawner;
-    [SerializeField]
     private BattleData _data;
+    public BattleData data => _data;
     public bool isActive => _data != null;
     void Awake()
     {
-        BattleSetUp();
+        //TEST: 
+        Reference.deck.ADD();
+        //
 
-        BattleStart();
+        BattleSetUp();
     }
 
     void BattleSetUp()
@@ -23,17 +24,22 @@ public class BattleSystem : MonoBehaviour
 
         //Tile Spawns
         tileSpawner.Spawn(_data);
+        DebugExt.Log("Spawning Tiles", this);
 
         //Player, Enemy Spawns
-        entitySpawner.Spawn(_data.enemyWave);
-        entitySpawner.Spawn(_data.allyWave);
-
-        //Populate Deck
-        Reference.deck.Populate();
-        Reference.deck.Draw();
+        Reference.entitySpawner.Spawn(_data.enemyWave);
+        DebugExt.Log("Spawning Enemies", this);
+        Reference.deck.PopulateAlly();
+        DebugExt.Log("Spawning Phantoms", this);
     }
-    void BattleStart()
+    public void BattleStart()
     {
+        DebugExt.Log("Starting...", this);
+        Reference.deck.SetUp();
+        DebugExt.Log("Populating Cards", this);
+        Reference.entitySpawner.SetUp();
+        DebugExt.Log("Spawning Allies", this);
+
         Events.InvokeOnBattleStart(_data);
     }
     void BattleEnd()

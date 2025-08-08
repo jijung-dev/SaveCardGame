@@ -29,19 +29,10 @@ MonoBehaviour:
     - {x: 0, y: -2}
     - {x: 1, y: -2}
     - {x: 2, y: -2}
-  allyWave:
-    baseObject: {fileID: 7022307776402844720, guid: a2afbfc4a7be5d64bb629c9e4ea541ce, type: 3}
-    spawnCount: 1
-    possibleEntity:
-    - {fileID: 11400000, guid: 9639b3012eb9ee947a1345f607b35c2a, type: 2}
-    possiblePosition:
-    - {x: -2, y: 1}
-    - {x: -1, y: 1}
-    - {x: 0, y: 1}
-    - {x: 1, y: 1}
-    - {x: 2, y: 1}
-    - {x: -2, y: 2}
-    - {x: -1, y: 2}
-    - {x: 0, y: 2}
-    - {x: 1, y: 2}
-    - {x: 2, y: 2}
+  allySpawnable:
+  - {x: 1, y: 0}
+  - {x: -1, y: 0}
+  - {x: 0, y: 0}
+  - {x: 1, y: 1}
+  - {x: -1, y: 1}
+  - {x: 0, y: 1}

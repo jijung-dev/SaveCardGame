@@ -3,15 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
 	public EntityData data;
 	[HideInInspector]
 	public GameTile container;
-	[SerializeField]
-	private RadialLayout layout;
-	[SerializeField]
-	private GameObject actionButton;
 	public Vector2Int celPosition => container.celPosition;
 	void Awake()
 	{
@@ -20,16 +16,7 @@ public class Entity : MonoBehaviour
 
 		SetUp();
 	}
-	public virtual void SetUp()
-	{
-		foreach (var item in data.actions)
-		{
-			item.owner = this;
-			var button = Instantiate(actionButton, layout.transform).GetComponent<Button>();
-			button.onClick.AddListener(() => SelectAction(item));
-		}
-		layout.gameObject.SetActive(false);
-	}
+	public abstract void SetUp();
 	public virtual void SelectAction(PlayActionData action)
 	{
 		if (action.instant)
@@ -40,32 +27,12 @@ public class Entity : MonoBehaviour
 
 		HoverSystem.instance.SetAction(action, celPosition);
 	}
-	public void Select()
+	public abstract void Select();
+	public abstract void UnSelect();
+	public virtual void Destroy()
 	{
-		layout.gameObject.SetActive(true);
-		Tween.Custom(
-			0f, 0.8f,
-			duration: 0.2f,
-			onValueChange: val =>
-			{
-				layout.fDistance = val;
-				layout.Rebuild();
-			},
-			ease: Ease.OutSine
-		);
-	}
-	public void UnSelect()
-	{
-		Tween.Custom(
-			0.8f, 0f,
-			duration: 0.2f,
-			onValueChange: val =>
-			{
-				layout.fDistance = val;
-				layout.Rebuild();
-			},
-			ease: Ease.InSine
-		).OnComplete(() => { layout.gameObject.SetActive(false); });
+		EntityManager.Remove(this);
+		Destroy(this.gameObject);
 	}
 
 	//Select Entity show actions

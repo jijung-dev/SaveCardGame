@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardContainer : MonoBehaviour
 {
     protected List<Card> _cards = new List<Card>();
+    public int Count => _cards.Count;
 
     public virtual void Add(params Card[] cards)
     {

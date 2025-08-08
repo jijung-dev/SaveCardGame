@@ -15,6 +15,11 @@ public class EntityManager
         entity = GetEntity(tile);
         return HasEntity(tile);
     }
+    public static Entity[] GetAllPhantom()
+    {
+        var phantoms = _entities.Where(r => r is Phantom);
+        return phantoms.ToArray();
+    }
 
     public static Entity GetEntity(GameTile tile)
     {
