@@ -8,6 +8,8 @@ public class EntitySpawner : MonoBehaviour
     private GameObject phantomBase;
     [SerializeField]
     private GameObject allyBase;
+    [SerializeField]
+    private GameObject cardBase;
     public void SetUp()
     {
         var phantoms = EntityManager.GetAllPhantom();
@@ -17,14 +19,20 @@ public class EntitySpawner : MonoBehaviour
             phantoms[i].Destroy();
         }
     }
-    public void SpawnPhantom(EntityData entityData, GameTile tile)
+    public Card SpawnCard(CardData data)
     {
-        Spawn(phantomBase, entityData, tile);
+        var card = Instantiate(cardBase, Reference.deck.transform).GetComponent<Card>();
+        card.SetData(data);
+        return card;
     }
-    public void Spawn(GameObject baseObject, EntityData entityData, GameTile tile)
+    public void SpawnPhantom(EntityData data, GameTile tile)
+    {
+        Spawn(phantomBase, data, tile);
+    }
+    public void Spawn(GameObject baseObject, EntityData data, GameTile tile)
     {
         var entity = Instantiate(baseObject, (Vector3Int)tile.celPosition, Quaternion.identity, transform).GetComponent<Entity>();
-        entity.data = entityData;
+        entity.data = data;
     }
     public void Spawn(EntityWaveData data)
     {

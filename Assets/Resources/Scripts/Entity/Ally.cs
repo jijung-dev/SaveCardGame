@@ -11,6 +11,7 @@ public class Ally : Entity
     private GameObject actionButton;
     public override void SetUp()
     {
+        base.SetUp();
         foreach (var item in data.actions)
         {
             item.owner = this;

@@ -13,20 +13,11 @@ public class Deck : CardContainer
     private CardContainer handPile;
     [SerializeField]
     private Transform deckParent;
-    private List<EntityData> _allies = new List<EntityData>();
-
     public int handSize;
 
-    //TEST:
-    public List<Card> cards;
-    public List<EntityData> allies;
+    [HideInInspector]
+    public DeckData data; 
 
-    public void ADD()
-    {
-        _cards = cards;
-        _allies = allies;
-    }
-    //
     public void SetUp()
     {
         Tween.PositionY(deckParent, 80f, duration: 1f, Ease.OutElastic);
@@ -38,7 +29,7 @@ public class Deck : CardContainer
     {
         //FIXME: Spawn on the same tile
         var spawnableTile = Reference.battleSystem.data.allySpawnable;
-        foreach (var item in _allies)
+        foreach (var item in data.allies)
         {
             GameTile tile = spawnableTile.RandomItem();
             Reference.entitySpawner.SpawnPhantom(item, tile);
@@ -47,6 +38,11 @@ public class Deck : CardContainer
     }
     public void Populate()
     {
+        foreach (var item in data.cards)
+        {
+            var card = Reference.entitySpawner.SpawnCard(item);
+            Add(card);
+        }
         drawPile.Add(_cards.ToArray());
         _cards.Clear();
     }

@@ -1,3 +1,5 @@
+using System;
+using EditorAttributes;
 using PrimeTween;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +11,25 @@ public abstract class Entity : MonoBehaviour
 	[HideInInspector]
 	public GameTile container;
 	public Vector2Int celPosition => container.celPosition;
+	public Health health;
+	[SerializeField]
+	private HealthDisplay display;
+
+	//TEST:
+	[Button(true)]
+	public void Hitting()
+	{
+		health.Hit(1);
+		display.promptUpdate = true;
+	}
+	[Button(true)]
+	public void Healing()
+	{
+		health.Heal(1);
+		display.promptUpdate = true;
+	}
+	//
+
 	void Awake()
 	{
 		container = (Vector2Int)transform.position.RoundToInt();
@@ -16,7 +37,12 @@ public abstract class Entity : MonoBehaviour
 
 		SetUp();
 	}
-	public abstract void SetUp();
+	public virtual void SetUp()
+	{
+		health = new Health();
+		health.SetUp(5);
+		display.promptUpdate = true;
+	}
 	public virtual void SelectAction(PlayActionData action)
 	{
 		if (action.instant)
@@ -25,7 +51,7 @@ public abstract class Entity : MonoBehaviour
 			return;
 		}
 
-		HoverSystem.instance.SetAction(action, celPosition);
+		Reference.hoverSystem.SetAction(action, celPosition);
 	}
 	public abstract void Select();
 	public abstract void UnSelect();

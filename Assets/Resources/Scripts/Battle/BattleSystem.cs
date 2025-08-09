@@ -1,33 +1,22 @@
 using UnityEngine;
+using static Deck;
 
 public class BattleSystem : MonoBehaviour
 {
-    [SerializeField]
-    private TileSpawner tileSpawner;
-    [SerializeField]
-    private BattleData _data;
-    public BattleData data => _data;
-    public bool isActive => _data != null;
-    void Awake()
-    {
-        //TEST: 
-        Reference.deck.ADD();
-        //
+    [HideInInspector]
+    public BattleData data;
 
-        BattleSetUp();
-    }
-
-    void BattleSetUp()
+    public void BattleSetUp()
     {
-        if (_data is null) { DebugExt.LogError("No Battle Data found", this); return; }
-        Events.InvokeOnBattleInit(_data);
+        if (data is null) { DebugExt.LogError("No Battle Data found", this); return; }
+        Events.InvokeOnBattleInit(data);
 
         //Tile Spawns
-        tileSpawner.Spawn(_data);
+        Reference.tileSpawner.Spawn(data);
         DebugExt.Log("Spawning Tiles", this);
 
         //Player, Enemy Spawns
-        Reference.entitySpawner.Spawn(_data.enemyWave);
+        Reference.entitySpawner.Spawn(data.enemyWave);
         DebugExt.Log("Spawning Enemies", this);
         Reference.deck.PopulateAlly();
         DebugExt.Log("Spawning Phantoms", this);
@@ -40,11 +29,11 @@ public class BattleSystem : MonoBehaviour
         Reference.entitySpawner.SetUp();
         DebugExt.Log("Spawning Allies", this);
 
-        Events.InvokeOnBattleStart(_data);
+        Events.InvokeOnBattleStart(data);
     }
     void BattleEnd()
     {
-        Events.InvokeOnBattleEnd(_data);
+        Events.InvokeOnBattleEnd(data);
 
         //Check Win or Lose
 

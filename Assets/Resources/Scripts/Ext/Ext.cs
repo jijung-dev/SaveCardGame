@@ -143,8 +143,9 @@ public class MonoBehaviourSingleton<T> : MonoBehaviour
         }
         else
         {
-            DestroyImmediate(this);
+            DestroyImmediate(this.gameObject);
         }
+        UnityEngine.Object.DontDestroyOnLoad(this.gameObject);
     }
 }
 

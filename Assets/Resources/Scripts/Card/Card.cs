@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    [SerializeField]
     private CardData _data;
     public CardData data => _data;
+    
     [SerializeField]
     private CardDisplay _display;
     public CardDisplay display => _display;
@@ -21,6 +21,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         //Set up Canvas here
         _data.action.owner = Reference.player;
+    }
+    public void SetData(CardData data)
+    {
+        _data = data;
     }
 
     public void FlipUp()
@@ -61,6 +65,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             return;
         }
         Reference.player.SelectCard(this);
-        HoverSystem.instance.SetAction(action, Vector2Int.one * 10000);
-	}
+        Reference.hoverSystem.SetAction(action, Vector2Int.one * 10000);
+    }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class HoverSystem : MonoBehaviourSingleton<HoverSystem>
+public class HoverSystem : MonoBehaviour
 {
     public enum HoverPhase
     {
