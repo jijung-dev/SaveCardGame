@@ -36,6 +36,7 @@ public class AreaSpawner : MonoBehaviour
         foreach (var item in tilePoses)
         {
             var spot = Instantiate(areaSpot, (Vector3Int)item, Quaternion.identity, transform);
+            spot.GetComponent<AreaSpot>().SetTile(item);
             _spots.Add(item, spot);
         }
     }

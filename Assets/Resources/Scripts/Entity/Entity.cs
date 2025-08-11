@@ -13,20 +13,20 @@ public abstract class Entity : MonoBehaviour
 	public Vector2Int celPosition => container.celPosition;
 	public Health health;
 	[SerializeField]
-	private HealthDisplay display;
+	private HealthDisplay healthDisplay;
 
 	//TEST:
 	[Button(true)]
 	public void Hitting()
 	{
 		health.Hit(1);
-		display.promptUpdate = true;
+		healthDisplay.promptUpdate = true;
 	}
 	[Button(true)]
 	public void Healing()
 	{
 		health.Heal(1);
-		display.promptUpdate = true;
+		healthDisplay.promptUpdate = true;
 	}
 	//
 
@@ -41,20 +41,17 @@ public abstract class Entity : MonoBehaviour
 	{
 		health = new Health();
 		health.SetUp(5);
-		display.promptUpdate = true;
+		healthDisplay.promptUpdate = true;
 	}
-	public virtual void SelectAction(PlayActionData action)
+	public virtual void Select()
 	{
-		if (action.instant)
-		{
-			ActionQueue.Stack(action, Vector2Int.one * 10000);
-			return;
-		}
-
-		Reference.hoverSystem.SetAction(action, celPosition);
+		GetComponent<SpriteRenderer>().color = Color.red;
+		Reference.hoverSystem.EntityProcessClick(this);
 	}
-	public abstract void Select();
-	public abstract void UnSelect();
+	public virtual void UnSelect()
+	{
+		GetComponent<SpriteRenderer>().color = Color.white;
+	}
 	public virtual void Destroy()
 	{
 		EntityManager.Remove(this);

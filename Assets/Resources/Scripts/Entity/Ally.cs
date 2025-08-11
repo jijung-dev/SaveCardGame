@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using PrimeTween;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,48 +6,35 @@ using UnityEngine.UI.Extensions;
 
 public class Ally : Entity
 {
-    [SerializeField]
-    private RadialLayout layout;
-    [SerializeField]
-    private GameObject actionButton;
+    private Card[] _actionCards;
     public override void SetUp()
     {
         base.SetUp();
+        var cards = new List<Card>();
         foreach (var item in data.actions)
         {
-            item.owner = this;
-            var button = Instantiate(actionButton, layout.transform).GetComponent<Button>();
-            button.onClick.AddListener(() => SelectAction(item));
+            item.action.owner = this;
+            var card = Reference.entitySpawner.SpawnCard(item);
+            card.transform.SetParent(transform);
+            card.FlipUp();
+            cards.Add(card);
         }
-        layout.gameObject.SetActive(false);
+        _actionCards = cards.ToArray();
     }
 
     public override void UnSelect()
     {
-        Tween.Custom(
-            0.8f, 0f,
-            duration: 0.2f,
-            onValueChange: val =>
-            {
-                layout.fDistance = val;
-                layout.Rebuild();
-            },
-            ease: Ease.InSine
-        ).OnComplete(() => { layout.gameObject.SetActive(false); });
+        base.UnSelect();
+        Reference.deck.UnSelect();
+        foreach (var item in _actionCards)
+        {
+            item.transform.SetParent(transform);
+        }
     }
 
     public override void Select()
     {
-        layout.gameObject.SetActive(true);
-        Tween.Custom(
-            0f, 0.8f,
-            duration: 0.2f,
-            onValueChange: val =>
-            {
-                layout.fDistance = val;
-                layout.Rebuild();
-            },
-            ease: Ease.OutSine
-        );
+        base.Select();
+        Reference.deck.PopulateEntitySkill(_actionCards);
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class HoverSystem : MonoBehaviour
@@ -17,13 +18,10 @@ public class HoverSystem : MonoBehaviour
     private Entity _currentEntity;
 
     private HoverPhase _hoverPhase = HoverPhase.Idle;
-    public Vector2Int? hoverTile
+    public GameTile hoverTile
     {
         get
         {
-            if (Mouse.current == null || Camera.main == null)
-                return null;
-
             Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
 
@@ -42,22 +40,19 @@ public class HoverSystem : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            //FIXME: Can click entity through action button
             HandleClick();
         }
 
-        if (hoverTile is null || _hoverPhase is not HoverPhase.Action || !spawner.HasTile(hoverTile.Value))
-        {
-            hoverSpawner.Despawn();
-            return;
-        }
-
-        //FIXME: When enter doesn't update
-        if (hoverSpawner.IsDifferentCenter(hoverTile.Value))
-        {
-            hoverSpawner.SetArea(_currentAction.hoverArea, hoverTile.Value);
-            hoverSpawner.promptUpdate = true;
-        }
+        // if (hoverTile is null || !spawner.HasTile(hoverTile.celPosition))
+        // {
+        //     hoverSpawner.Despawn();
+        //     return;
+        // }
+        // if (spawner.HasTile(hoverTile.celPosition))
+        // {
+        //     hoverSpawner.SetArea(_currentAction.hoverArea, hoverTile.celPosition);
+        //     hoverSpawner.promptUpdate = true;
+        // }
     }
 
     public void SetAction(PlayActionData action, Vector2Int center)
@@ -74,7 +69,7 @@ public class HoverSystem : MonoBehaviour
 
     void HandleClick()
     {
-        if (hoverTile == null)
+        if (hoverTile == null && !EventSystem.current.IsPointerOverGameObject())
         {
             UnSelectAll();
             return;
@@ -82,12 +77,9 @@ public class HoverSystem : MonoBehaviour
 
         switch (_hoverPhase)
         {
-            case HoverPhase.Idle:
-                EntityProcessClick();
-                break;
-            case HoverPhase.Action:
-                ActionProcessClick();
-                break;
+            // case HoverPhase.Action:
+            //     ActionProcessClick();
+            //     break;
             default:
                 break;
         }
@@ -108,30 +100,28 @@ public class HoverSystem : MonoBehaviour
         _currentAction = null;
         _hoverPhase = HoverPhase.Idle;
     }
-    void UnSelectAll()
+    public void UnSelectAll()
     {
         UnSelectEntity();
         UnSelectAction();
         Reference.player.UnSelectCard();
+        //Reference.deck.UnSelect();
     }
-    void EntityProcessClick()
+    public void EntityProcessClick(Entity entity)
     {
-        //FIXME: Glitch when click too close
         UnSelectAll();
-        if (EntityManager.TryGetEntity(hoverTile, out Entity entity))
-        {
-            DebugExt.Log($"Select Entity: {entity.name}", this);
-            entity.Select();
-            _currentEntity = entity;
-        }
+
+        DebugExt.Log($"Select Entity: {entity.name}", this);
+        _currentEntity = entity;
+
     }
-    void ActionProcessClick()
+    public void ActionProcessClick(GameTile hoverTile)
     {
-        if (spawner.HasTile(hoverTile.Value))
+        if (spawner.HasTile(hoverTile.celPosition))
         {
-            ActionQueue.Stack(_currentAction, hoverTile.Value);
+            ActionQueue.Stack(_currentAction, hoverTile.celPosition);
         }
-        
+
         if (_currentAction.owner is Player player)
         {
             player.Discard();

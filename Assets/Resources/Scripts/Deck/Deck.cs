@@ -13,10 +13,12 @@ public class Deck : CardContainer
     private CardContainer handPile;
     [SerializeField]
     private Transform deckParent;
+    [SerializeField]
+    private Transform entityDeckParent;
     public int handSize;
 
     [HideInInspector]
-    public DeckData data; 
+    public DeckData data;
 
     public void SetUp()
     {
@@ -27,14 +29,29 @@ public class Deck : CardContainer
 
     public void PopulateAlly()
     {
-        //FIXME: Spawn on the same tile
-        var spawnableTile = Reference.battleSystem.data.allySpawnable;
+        List<Vector2Int> spawnableTile = Reference.battleSystem.data.allySpawnable.ToList();
         foreach (var item in data.allies)
         {
             GameTile tile = spawnableTile.RandomItem();
             Reference.entitySpawner.SpawnPhantom(item, tile);
             spawnableTile.Remove(tile.celPosition);
         }
+    }
+    public void PopulateEntitySkill(params Card[] cards)
+    {
+        foreach (var item in cards)
+        {
+            item.transform.SetParent(entityDeckParent.GetChild(0));
+        }
+        deckParent.gameObject.SetActive(false);
+        entityDeckParent.gameObject.SetActive(true);
+        Tween.PositionY(entityDeckParent, startValue: -200f, endValue: 80f, duration: 1f, Ease.OutElastic);
+    }
+    public void UnSelect()
+    {
+        deckParent.gameObject.SetActive(true);
+        entityDeckParent.gameObject.SetActive(false);
+        Tween.PositionY(deckParent, startValue: -200f, endValue: 80f, duration: 1f, Ease.OutElastic);
     }
     public void Populate()
     {

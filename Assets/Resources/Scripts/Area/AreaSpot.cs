@@ -1,26 +1,25 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-//FIXME: Delete this
 public class AreaSpot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    // private AreaSelector _selector;
-    // private GameTile _tile;
-    // void Awake()
-    // {
-    //     _selector = transform.parent.GetComponent<AreaSelector>();
-    // }
-    // public void SetTile(GameTile tile)
-    // {
-    //     _tile = tile;
-    // }
+    private GameTile _tile;
+    public void SetTile(GameTile tile)
+    {
+        _tile = tile;
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //_selector.Hover(_tile.celPosition);
+        GetComponent<Image>().color = Color.red;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // _selector.Hover(null);
+        GetComponent<Image>().color = Color.green;
+    }
+    public void Select()
+    {
+        Reference.hoverSystem.ActionProcessClick(_tile);
     }
 }

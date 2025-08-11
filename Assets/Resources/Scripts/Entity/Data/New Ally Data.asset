@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartType: {fileID: 11400000, guid: e6553bbb9d1ce254886a9216ac3139c7, type: 2}
   actions:
-  - {fileID: 11400000, guid: 462fa468dabb70249a824299729bbd76, type: 2}
-  - {fileID: 11400000, guid: 462fa468dabb70249a824299729bbd76, type: 2}
-  - {fileID: 11400000, guid: 462fa468dabb70249a824299729bbd76, type: 2}
+  - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+  - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+  - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}

@@ -12,10 +12,12 @@ public class Phantom : Entity
 
 	public override void Select()
 	{
-		SelectAction(moveAction);
+		base.Select();
+		Reference.hoverSystem.SetAction(moveAction, celPosition);
 	}
+
 	public override void UnSelect()
 	{
-		
+
 	}
 }
