@@ -48,6 +48,18 @@ public static class DebugExt
         }
     }
 }
+public static class GameObjectExt
+{
+    public static GameObject[] GetChildren(this Transform transform)
+    {
+        var childs = new List<GameObject>();
+        foreach (GameObject child in transform)
+        {
+            childs.Add(child);
+        }
+        return childs.ToArray();
+    }
+}
 
 public static class VectorExt
 {

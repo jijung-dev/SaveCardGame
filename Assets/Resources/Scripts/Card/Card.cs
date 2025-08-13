@@ -12,14 +12,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     private CardDisplay _display;
     public CardDisplay display => _display;
 
-    //TEST:
-    [SerializeField]
-    private Canvas canvas;
-    //
-
     void Start()
     {
-        //Set up Canvas here
         _data.action.owner = Reference.player;
     }
     public void SetData(CardData data)
@@ -51,7 +45,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //FIXME: Can use action through the card
         if (eventData.button != PointerEventData.InputButton.Left)
             return;
 
