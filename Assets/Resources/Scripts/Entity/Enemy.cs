@@ -2,18 +2,27 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-	public override void Select()
-	{
-		throw new System.NotImplementedException();
-	}
-
 	public override void SetUp()
 	{
-		throw new System.NotImplementedException();
+		base.SetUp();
+		Events.OnTurnEnd += EntityProcess;
+	}
+	public override void Destroy()
+	{
+		Events.OnTurnEnd -= EntityProcess;
+		base.Destroy();
 	}
 
+	public override void Select()
+	{
+
+	}
 	public override void UnSelect()
 	{
-		throw new System.NotImplementedException();
+
+	}
+	public void EntityProcess()
+	{
+		DebugExt.Log("running", this);
 	}
 }

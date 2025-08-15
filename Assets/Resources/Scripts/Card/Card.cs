@@ -7,18 +7,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 {
     private CardData _data;
     public CardData data => _data;
-    
+
     [SerializeField]
     private CardDisplay _display;
     public CardDisplay display => _display;
 
-    void Start()
-    {
-        _data.action.owner = Reference.player;
-    }
     public void SetData(CardData data)
     {
         _data = data;
+        _data.action = ScriptableObject.Instantiate(data.action);
+        _data.action.cost = data.cost;
+        Debug.Log($"{_data.action.cost}  {data.cost}  {data.action.cost}  {_data.cost}");
     }
 
     public void FlipUp()
@@ -47,6 +46,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         if (eventData.button != PointerEventData.InputButton.Left)
             return;
+
+        if (_data.action.owner.energy.value < _data.cost)
+        {
+            DebugExt.Log($"{_data.action.owner.name}: Don't have enough energy", this);
+            return;
+        }
 
         SelectAction(_data.action);
     }

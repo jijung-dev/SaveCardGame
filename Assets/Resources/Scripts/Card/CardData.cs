@@ -8,4 +8,5 @@ public class CardData : ScriptableObject
     public string title;
     public string description;
     public PlayActionData action;
+    public int cost;
 }

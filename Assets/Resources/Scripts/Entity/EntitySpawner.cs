@@ -22,7 +22,7 @@ public class EntitySpawner : MonoBehaviour
     public Card SpawnCard(CardData data)
     {
         var card = Instantiate(cardBase, Reference.deck.transform).GetComponent<Card>();
-        card.SetData(data);
+        card.SetData(ScriptableObject.Instantiate(data));
         return card;
     }
     public void SpawnPhantom(EntityData data, GameTile tile)

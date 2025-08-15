@@ -15,11 +15,13 @@ public class Health
 
     public virtual void Hit(int damage)
     {
-        _value -= damage;
+        if (_value >= 0)
+            _value -= damage;
     }
     public virtual void Heal(int healAmount)
     {
-        _value += healAmount;
+        if (_value < _maxValue)
+            _value += healAmount;
     }
     public virtual void Increase(int increaseAmount)
     {

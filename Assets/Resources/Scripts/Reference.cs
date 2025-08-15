@@ -43,9 +43,6 @@ public class Reference : MonoBehaviourSingleton<Reference>
         _entitySpawner = FindByTag<EntitySpawner>("EntitySpawner");
         _tileSpawner = FindByTag<TileSpawner>("TileSpawner");
         _hoverSystem = FindByTag<HoverSystem>("HoverSystem");
-
-        var initiator = FindByTag<BattleInitiator>("BattleInitiator");
-        initiator.InitBattle();
     }
     void OutBattle()
     {

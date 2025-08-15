@@ -10,6 +10,7 @@ public static class Events
     public static Action<CampaignData> OnCampaignStart;
     public static Action<CampaignData> OnCampaignEnd;
 
+    public static Action OnTurnEnd;
     public static void InvokeOnBattleInit(BattleData data)
     {
         OnBattleInit?.Invoke(data);
@@ -33,5 +34,9 @@ public static class Events
     public static void InvokeOnCampaignEnd(CampaignData data)
     {
         OnCampaignEnd?.Invoke(data);
+    }
+    public static void InvokeOnTurnEnd()
+    {
+        OnTurnEnd?.Invoke();
     }
 }

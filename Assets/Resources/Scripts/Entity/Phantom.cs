@@ -7,7 +7,10 @@ public class Phantom : Entity
 
 	public override void SetUp()
 	{
-		
+		moveAction = ScriptableObject.Instantiate(moveAction);
+		moveAction.owner = this;
+		energy = new Energy();
+		energy.SetUp(999);
 	}
 
 	public override void Select()

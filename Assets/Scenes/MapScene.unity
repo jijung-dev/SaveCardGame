@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 205877795}
   - component: {fileID: 205877794}
+  - component: {fileID: 205877796}
   m_Layer: 0
   m_Name: CampaignSystem
   m_TagString: Untagged
@@ -163,6 +164,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &205877796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205877793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3a38cb07f6b94468395e5bc6a97d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: b07bc5cf1c981004c98805cdd86472ed, type: 2}
+  _deckData:
+    cards:
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    allies:
+    - {fileID: 11400000, guid: 9639b3012eb9ee947a1345f607b35c2a, type: 2}
+    - {fileID: 11400000, guid: 9639b3012eb9ee947a1345f607b35c2a, type: 2}
+    - {fileID: 11400000, guid: 9639b3012eb9ee947a1345f607b35c2a, type: 2}
 --- !u!1 &775540792
 GameObject:
   m_ObjectHideFlags: 0

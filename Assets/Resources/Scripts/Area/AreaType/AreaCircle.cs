@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New AreaCircle", menuName = "Area/AreaCircle")]
 public class AreaCircle : AreaData
 {
-    public override Vector2Int[] GetTile(Vector2Int center, int size)
+    public override Vector2Int[] GetTile(Vector2Int center, int size, TileConstraint constraint)
     {
         List<Vector2Int> hitTiles = new List<Vector2Int>();
         //int rSquared = size * size;
@@ -26,8 +26,8 @@ public class AreaCircle : AreaData
                 {
                     if (!TileManager.HasTile(cellPos))
                         continue;
-                    // if (constraint != null && constraint.Any(r => !r.Check(cellPos)))
-                    //     continue;
+                    if (constraint == null || !constraint.Check(cellPos))
+                        continue;
 
                     hitTiles.Add(cellPos);
                 }

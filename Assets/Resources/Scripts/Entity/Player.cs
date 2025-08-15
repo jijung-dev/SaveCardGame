@@ -28,9 +28,17 @@ public class Player : Entity
 		Reference.deck.Discard(_card);
 		UnSelectCard();
 	}
+	public override void Awake()
+	{
+		SetUp();
+	}
 	public override void SetUp()
 	{
-
+		energy = new Energy();
+		energy.SetUp(5);
+		energy.healAmount = 3;
+		energyDisplay.promptUpdate = true;
+		Events.OnTurnEnd += energy.RecoverEnergy;
 	}
 
 	public override void Select()

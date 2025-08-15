@@ -12,25 +12,41 @@ public abstract class Entity : MonoBehaviour
 	public GameTile container;
 	public Vector2Int celPosition => container.celPosition;
 	public Health health;
-	[SerializeField]
-	private HealthDisplay healthDisplay;
+	public HealthDisplay healthDisplay;
 
+	public Energy energy;
+	public EnergyDisplay energyDisplay;
+
+	// //TEST:
+	// [Button(true)]
+	// public void Hitting()
+	// {
+	// 	health.Hit(1);
+	// 	healthDisplay.promptUpdate = true;
+	// }
+	// [Button(true)]
+	// public void Healing()
+	// {
+	// 	health.Heal(1);
+	// 	healthDisplay.promptUpdate = true;
+	// }
+	// //
 	//TEST:
 	[Button(true)]
-	public void Hitting()
+	public void Use()
 	{
-		health.Hit(1);
-		healthDisplay.promptUpdate = true;
+		energy.Hit(1);
+		energyDisplay.promptUpdate = true;
 	}
 	[Button(true)]
-	public void Healing()
+	public void Restore()
 	{
-		health.Heal(1);
-		healthDisplay.promptUpdate = true;
+		energy.Heal(1);
+		energyDisplay.promptUpdate = true;
 	}
 	//
 
-	void Awake()
+	public virtual void Awake()
 	{
 		container = (Vector2Int)transform.position.RoundToInt();
 		EntityManager.Add(this);
@@ -39,9 +55,16 @@ public abstract class Entity : MonoBehaviour
 	}
 	public virtual void SetUp()
 	{
+		//TODO: Add health info into EnityData
 		health = new Health();
 		health.SetUp(5);
 		healthDisplay.promptUpdate = true;
+
+		energy = new Energy();
+		energy.SetUp(3);
+		energy.healAmount = 1;
+		energyDisplay.promptUpdate = true;
+		Events.OnTurnEnd += energy.RecoverEnergy;
 	}
 	public virtual void Select()
 	{
@@ -55,6 +78,9 @@ public abstract class Entity : MonoBehaviour
 	public virtual void Destroy()
 	{
 		EntityManager.Remove(this);
+		if (energy != null)
+			Events.OnTurnEnd -= energy.RecoverEnergy;
+			
 		Destroy(this.gameObject);
 	}
 

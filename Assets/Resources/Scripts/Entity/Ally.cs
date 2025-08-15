@@ -13,8 +13,8 @@ public class Ally : Entity
         var cards = new List<Card>();
         foreach (var item in data.actions)
         {
-            item.action.owner = this;
             var card = Reference.entitySpawner.SpawnCard(item);
+            card.data.action.owner = this;
             card.transform.SetParent(transform);
             card.FlipUp();
             cards.Add(card);

@@ -120,11 +120,12 @@ public class HoverSystem : MonoBehaviour
         if (spawner.HasTile(hoverTile.celPosition))
         {
             ActionQueue.Stack(_currentAction, hoverTile.celPosition);
-        }
-
-        if (_currentAction.owner is Player player)
-        {
-            player.Discard();
+            if (_currentAction.owner is Player player)
+            {
+                player.Discard();
+            }
+            _currentAction.owner.energy.Hit(_currentAction.cost);
+            _currentAction.owner.energyDisplay.promptUpdate = true;
         }
 
         UnSelectAll();

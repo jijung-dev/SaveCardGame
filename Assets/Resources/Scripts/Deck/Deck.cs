@@ -58,6 +58,7 @@ public class Deck : CardContainer
         foreach (var item in data.cards)
         {
             var card = Reference.entitySpawner.SpawnCard(item);
+            card.data.action.owner = Reference.player;
             Add(card);
         }
         drawPile.Add(_cards.ToArray());

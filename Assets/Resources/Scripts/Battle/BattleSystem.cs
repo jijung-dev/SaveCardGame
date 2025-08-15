@@ -8,9 +8,6 @@ public class BattleSystem : MonoBehaviour
 
     public void BattleSetUp()
     {
-        if (data is null) { DebugExt.LogError("No Battle Data found", this); return; }
-        Events.InvokeOnBattleInit(data);
-
         //Tile Spawns
         Reference.tileSpawner.Spawn(data);
         DebugExt.Log("Spawning Tiles", this);
