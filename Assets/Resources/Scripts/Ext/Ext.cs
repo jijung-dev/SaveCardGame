@@ -116,10 +116,21 @@ public static class ArrayExt
 }
 public static class LayoutExt
 {
-    public static void Rebuild(this HorizontalLayoutGroup layout)
+    public static void Rebuild(this LayoutGroup layout)
     {
         layout.enabled = false;
         layout.enabled = true;
+    }
+    public static Vector2 CalculateChildrenScale(this VerticalLayoutGroup layout)
+    {
+        var spacing = layout.spacing;
+        Vector2 size = Vector2.zero;
+        foreach (var popup in layout.transform)
+        {
+            var popupHeight = ((RectTransform)popup).rect.height;
+            size.y += popupHeight + spacing;
+        }
+        return size;
     }
 }
 

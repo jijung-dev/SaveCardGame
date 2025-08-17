@@ -10,6 +10,7 @@ public class Reference : MonoBehaviourSingleton<Reference>
     private static TileSpawner _tileSpawner;
     private static HoverSystem _hoverSystem;
     private static NodeSpawner _nodeSpawner;
+    private static InspectSystem _inspectSystem;
 
     public static Deck deck => _deck;
     public static Player player => _player;
@@ -18,6 +19,7 @@ public class Reference : MonoBehaviourSingleton<Reference>
     public static TileSpawner tileSpawner => _tileSpawner;
     public static HoverSystem hoverSystem => _hoverSystem;
     public static NodeSpawner nodeSpawner => _nodeSpawner;
+    public static InspectSystem inspectSystem => _inspectSystem;
     protected override void Awake()
     {
         base.Awake();
@@ -43,6 +45,7 @@ public class Reference : MonoBehaviourSingleton<Reference>
         _entitySpawner = FindByTag<EntitySpawner>("EntitySpawner");
         _tileSpawner = FindByTag<TileSpawner>("TileSpawner");
         _hoverSystem = FindByTag<HoverSystem>("HoverSystem");
+        _inspectSystem = FindByTag<InspectSystem>("InspectSystem");
     }
     void OutBattle()
     {
@@ -52,6 +55,7 @@ public class Reference : MonoBehaviourSingleton<Reference>
         _entitySpawner = null;
         _tileSpawner = null;
         _hoverSystem = null;
+        _inspectSystem = null;
 
         // var initiator = FindByTag<BattleInitiator>("BattleInitiator");
         // initiator.InitBattle();

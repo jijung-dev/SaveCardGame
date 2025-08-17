@@ -10,8 +10,8 @@ public class AreaFullBoard : AreaData
         List<Vector2Int> hitTiles = new List<Vector2Int>();
         foreach (var item in TileManager.tiles.Keys)
         {
-            if (constraint != null && constraint.Check(item))
-                hitTiles.Add(item);
+            if (constraint != null && !constraint.Check(item)) continue;
+            hitTiles.Add(item);
         }
 
         return hitTiles.ToArray();

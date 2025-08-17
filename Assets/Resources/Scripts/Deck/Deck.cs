@@ -12,6 +12,8 @@ public class Deck : CardContainer
     [SerializeField]
     private CardContainer handPile;
     [SerializeField]
+    private CardContainer actionPile;
+    [SerializeField]
     private Transform deckParent;
     [SerializeField]
     private Transform entityDeckParent;
@@ -41,7 +43,7 @@ public class Deck : CardContainer
     {
         foreach (var item in cards)
         {
-            item.transform.SetParent(entityDeckParent.GetChild(0));
+            actionPile.Add(item);
         }
         deckParent.gameObject.SetActive(false);
         entityDeckParent.gameObject.SetActive(true);

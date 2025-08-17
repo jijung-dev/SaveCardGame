@@ -15,6 +15,6 @@ MonoBehaviour:
   id: lmao
   sprite: {fileID: 21300000, guid: 0079df5455c87c146954b58c784f3f93, type: 3}
   title: Lmao
-  description: LMAO HAHA
+  description: hahaha yes <Lmao> <Lmao> yesy yse <Haha>
   action: {fileID: 11400000, guid: ab0aa6b620314f0499afe3a65847e8aa, type: 2}
   cost: 1

@@ -4,12 +4,13 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - EntitySpawner
-  - TileSpawner
   - BattleSystem
   - HoverSystem
+  - InspectSystem
   - Deck
   - BattleInitiator
+  - EntitySpawner
+  - TileSpawner
   - NodeSpawner
   layers:
   - Default

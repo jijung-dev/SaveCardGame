@@ -11,6 +11,7 @@ public class CardContainer : MonoBehaviour
     {
         foreach (var item in cards)
         {
+            item.container = this;
             item.transform.SetParent(transform);
             item.transform.position = transform.position;
         }
@@ -22,20 +23,12 @@ public class CardContainer : MonoBehaviour
             return null;
             
         var card = _cards.First();
-        _cards.Remove(card);
+        Remove(card);
         return card;
-    }
-    public virtual Card PullRandom()
-    {
-        if (_cards.Count <= 0)
-            return null;
-            
-        var ranCard = _cards.RandomItem();
-        _cards.Remove(ranCard);
-        return ranCard;
     }
     public virtual void Remove(Card card)
     {
+        card.container = null;
         _cards.Remove(card);
     }
 }
