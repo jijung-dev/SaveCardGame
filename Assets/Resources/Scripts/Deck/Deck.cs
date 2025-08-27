@@ -10,9 +10,9 @@ public class Deck : CardContainer
     [SerializeField]
     private DiscardPile discardPile;
     [SerializeField]
-    private CardContainer handPile;
+    private HandPile handPile;
     [SerializeField]
-    private CardContainer actionPile;
+    private HandPile actionPile;
     [SerializeField]
     private Transform deckParent;
     [SerializeField]
@@ -24,7 +24,8 @@ public class Deck : CardContainer
 
     public void SetUp()
     {
-        Tween.PositionY(deckParent, 80f, duration: 1f, Ease.OutElastic);
+        Events.OnTurnEnd += Draw;
+        Tween.PositionY(deckParent, 100f, duration: 1f, Ease.OutElastic);
         Populate();
         Draw();
     }
@@ -39,21 +40,24 @@ public class Deck : CardContainer
             spawnableTile.Remove(tile.celPosition);
         }
     }
-    public void PopulateEntitySkill(params Card[] cards)
+    public void PopulateEntitySkill(EntityDeck deck)
     {
-        foreach (var item in cards)
-        {
-            actionPile.Add(item);
+        for (int i = 0; i < deck.cards.Length; i++)
+        {    
+            var card = deck.Pull();
+            
+            actionPile.Add(card);
+            card.Enable();
         }
         deckParent.gameObject.SetActive(false);
         entityDeckParent.gameObject.SetActive(true);
-        Tween.PositionY(entityDeckParent, startValue: -200f, endValue: 80f, duration: 1f, Ease.OutElastic);
+        Tween.PositionY(entityDeckParent, startValue: -200f, endValue: 100f, duration: 1f, Ease.OutElastic);
     }
     public void UnSelect()
     {
         deckParent.gameObject.SetActive(true);
         entityDeckParent.gameObject.SetActive(false);
-        Tween.PositionY(deckParent, startValue: -200f, endValue: 80f, duration: 1f, Ease.OutElastic);
+        Tween.PositionY(deckParent, startValue: -200f, endValue: 100f, duration: 1f, Ease.OutElastic);
     }
     public void Populate()
     {
@@ -61,23 +65,30 @@ public class Deck : CardContainer
         {
             var card = Reference.entitySpawner.SpawnCard(item);
             card.data.action.owner = Reference.player;
-            Add(card);
+
+            drawPile.Add(card);
         }
-        drawPile.Add(_cards.ToArray());
         _cards.Clear();
     }
 
     public void Draw()
     {
+        discardPile.Add(handPile.PullAll());
+
         for (int i = handPile.Count; i < handSize - 1; i++)
         {
             if (drawPile.Count <= 0)
                 drawPile.Add(discardPile.PullAll());
-            handPile.Add(drawPile.Pull());
+                
+            var card = drawPile.Pull();
+            handPile.Add(card);
+
+            card.Enable();
         }
     }
     public void Discard(Card card)
     {
+        card.Disable();
         handPile.Remove(card);
         discardPile.Add(card);
     }

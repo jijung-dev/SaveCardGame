@@ -1,11 +1,15 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DrawPile : CardContainer
 {
-	public override Card Pull()
+	public override void Add(params Card[] cards)
 	{
-		var card = base.Pull();
-		card.FlipUp();
-		return card;
+		foreach (var card in cards)
+		{
+			card.display.scale = 0.5f;
+			card.display.promptUpdate = true;
+		}
+		base.Add(cards);
 	}
 }

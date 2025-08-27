@@ -26,6 +26,17 @@ public class CardContainer : MonoBehaviour
         Remove(card);
         return card;
     }
+    public virtual Card[] PullAll()
+	{
+		var cards = _cards.ToArray();
+		_cards.Clear();
+		
+		foreach (var item in cards)
+		{
+			item.container = null;
+		}
+		return cards;
+	}
     public virtual void Remove(Card card)
     {
         card.container = null;

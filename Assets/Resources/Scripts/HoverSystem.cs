@@ -105,7 +105,7 @@ public class HoverSystem : MonoBehaviour
         UnSelectEntity();
         UnSelectAction();
         Reference.player.UnSelectCard();
-        //Reference.deck.UnSelect();
+        spawner.Clear();
     }
     public void EntityProcessClick(Entity entity)
     {
@@ -125,7 +125,7 @@ public class HoverSystem : MonoBehaviour
                 player.Discard();
             }
             _currentAction.owner.energy.Hit(_currentAction.cost);
-            _currentAction.owner.energyDisplay.promptUpdate = true;
+            _currentAction.owner.display.promptUpdate = true;
         }
 
         UnSelectAll();

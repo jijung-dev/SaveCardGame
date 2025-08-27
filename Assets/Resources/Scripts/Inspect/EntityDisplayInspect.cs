@@ -1,9 +1,7 @@
 using TMPro;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class CardDisplay : MonoBehaviour
+public class EntityDisplayInspect : MonoBehaviour
 {
 	[SerializeField]
 	private TextMeshProUGUI title;
@@ -11,13 +9,13 @@ public class CardDisplay : MonoBehaviour
 	private Image sprite;
 	[SerializeField]
 	private TextMeshProUGUI desc;
-	private CardData _data;
-	public float scale;
+	private Entity _entity;
+	private EntityData _data;
 	public bool promptUpdate;
-
-	public void SetData(CardData data)
+	public void SetData(Entity entity)
 	{
-		_data = data;
+		_entity = entity;
+		_data = entity.data;
 		promptUpdate = true;
 	}
 	void Update()
@@ -25,7 +23,6 @@ public class CardDisplay : MonoBehaviour
 		if (promptUpdate)
 		{
 			promptUpdate = false;
-			transform.localScale = Vector3.one * scale;
 			UpdateDisplay();
 		}
 	}
@@ -35,5 +32,12 @@ public class CardDisplay : MonoBehaviour
 		title.text = _data.title;
 		sprite.sprite = _data.sprite;
 		desc.text = _data.description;
+	}
+	public void OpenDeck()
+	{
+		if (_entity is Ally ally)
+		{
+			Reference.inspectSystem.containerDisplay.Open(ally.deck);
+		}
 	}
 }

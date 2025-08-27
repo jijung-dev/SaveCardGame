@@ -12,10 +12,8 @@ public abstract class Entity : MonoBehaviour
 	public GameTile container;
 	public Vector2Int celPosition => container.celPosition;
 	public Health health;
-	public HealthDisplay healthDisplay;
-
 	public Energy energy;
-	public EnergyDisplay energyDisplay;
+	public EntityDisplay display;
 
 	// //TEST:
 	// [Button(true)]
@@ -36,13 +34,13 @@ public abstract class Entity : MonoBehaviour
 	public void Use()
 	{
 		energy.Hit(1);
-		energyDisplay.promptUpdate = true;
+		display.promptUpdate = true;
 	}
 	[Button(true)]
 	public void Restore()
 	{
 		energy.Heal(1);
-		energyDisplay.promptUpdate = true;
+		display.promptUpdate = true;
 	}
 	//
 
@@ -58,13 +56,14 @@ public abstract class Entity : MonoBehaviour
 		//TODO: Add health info into EnityData
 		health = new Health();
 		health.SetUp(5);
-		healthDisplay.promptUpdate = true;
 
 		energy = new Energy();
 		energy.SetUp(3);
 		energy.healAmount = 1;
-		energyDisplay.promptUpdate = true;
 		Events.OnTurnEnd += energy.RecoverEnergy;
+
+		display.SetData(data);
+		display.promptUpdate = true;
 	}
 	public virtual void Select()
 	{

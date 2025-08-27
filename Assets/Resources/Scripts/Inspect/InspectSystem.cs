@@ -9,48 +9,57 @@ public class InspectSystem : MonoBehaviour
     [SerializeField]
     private PopUpContainter popUpContainter;
     [SerializeField]
-    private CardContainer container;
+    private GameObject displayPanel;
     [SerializeField]
-    private GameObject inspectPanel;
+    private CardDisplay cardDisplay;
+    [SerializeField]
+    private EntityDisplayInspect entityDisplay;
 
-    private CardContainer preContainer;
-    private Card _card;
+    private CardData _card;
+    private EntityData _entity;
+    public ContainerDisplay containerDisplay;
 
-    [Button(true)]
     public void Clear()
     {
-        inspectPanel.SetActive(false);
-
-        _card.container.Remove(_card);
-        preContainer.Add(_card);
-        _card.FlipUp();
-
-        preContainer = null;
+        cardDisplay.gameObject.SetActive(false);
+        entityDisplay.gameObject.SetActive(false);
+        displayPanel.SetActive(false);
         _card = null;
+        _entity = null;
 
         popUpContainter.Clear();
     }
     public void Inspect(Card card)
     {
-        _card = card;
-        preContainer = _card.container;
-        _card.container.Remove(_card);
-        container.Add(_card);
+        _card = card.data;
+        cardDisplay.SetData(_card);
 
-        _card.display.scale = 1.5f;
-        _card.display.promptUpdate = true;
-
-        var keywords = GetKeywords(_card.data);
+        var keywords = GetKeywords(_card.description);
         foreach (var item in keywords)
         {
             popUpContainter.Spawn(item);
         }
 
-        inspectPanel.SetActive(true);
+        cardDisplay.gameObject.SetActive(true);
+        displayPanel.SetActive(true);
     }
-    public KeywordData[] GetKeywords(CardData data)
+    public void Inspect(Entity entity)
     {
-        var tags = GetKeywordTags(data.description);
+        _entity = entity.data;
+        entityDisplay.SetData(entity);
+
+        var keywords = GetKeywords(_entity.description);
+        foreach (var item in keywords)
+        {
+            popUpContainter.Spawn(item);
+        }
+
+        entityDisplay.gameObject.SetActive(true);
+        displayPanel.SetActive(true);
+    }
+    public KeywordData[] GetKeywords(string description)
+    {
+        var tags = GetKeywordTags(description);
 
         var keywords = new List<KeywordData>();
         foreach (var item in tags)

@@ -24,7 +24,6 @@ public class Player : Entity
 	}
 	public void Discard()
 	{
-		_card.FlipDown();
 		Reference.deck.Discard(_card);
 		UnSelectCard();
 	}
@@ -37,7 +36,7 @@ public class Player : Entity
 		energy = new Energy();
 		energy.SetUp(5);
 		energy.healAmount = 3;
-		energyDisplay.promptUpdate = true;
+		display.promptUpdate = true;
 		Events.OnTurnEnd += energy.RecoverEnergy;
 	}
 

@@ -13,45 +13,54 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public CardDisplay display => _display;
 
     public CardContainer container;
-    public bool isEnable;
+    public bool isClickable;
+    public bool isHoverable;
+    public bool isInspectable;
 
+    public void Enable()
+    {
+        isClickable = true;
+        isHoverable = true;
+        isInspectable = true;
+    }
+    public void Disable()
+    {
+        isClickable = false;
+        isHoverable = false;
+        isInspectable = false;
+    }
     public void SetData(CardData data)
     {
+        Disable();
+
         _data = data;
         _data.action = ScriptableObject.Instantiate(data.action);
         _data.action.cost = data.cost;
+
+        display.SetData(_data);
     }
 
-    public void FlipUp()
-    {
-        _display.scale = 1;
-        _display.promptUpdate = true;
-        isEnable = true;
-    }
-    public void FlipDown()
-    {
-        _display.scale = 0.5f;
-        _display.promptUpdate = true;
-        isEnable = false;
-    }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!isEnable) return;
-        Tween.Scale(transform, 1.3f, duration: 0.25f, Ease.OutElastic);
-        Tween.LocalPositionY(transform, 100f, duration: 0.25f, Ease.OutElastic);
+        if (!isHoverable) return;
+        Tween.Scale(transform, 1.1f, duration: 0.25f, Ease.OutElastic);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!isEnable) return;
+        if (!isHoverable) return;
         Tween.Scale(transform, 1f, duration: 0.25f, Ease.OutElastic);
-        Tween.LocalPositionY(transform, 0f, duration: 0.25f, Ease.OutElastic);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!isEnable) return;
-        if (eventData.button == PointerEventData.InputButton.Left)
+
+        if (isInspectable && eventData.button == PointerEventData.InputButton.Right)
+        {
+            Reference.inspectSystem.Inspect(this);
+        }
+        
+        if (isClickable && eventData.button == PointerEventData.InputButton.Left)
         {
             if (_data.action.owner.energy.value < _data.cost)
             {
@@ -61,11 +70,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
             SelectAction(_data.action);
         }
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            Reference.inspectSystem.Inspect(this);
-            isEnable = false;
-        }
+
     }
     public virtual void SelectAction(PlayActionData action)
     {

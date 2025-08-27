@@ -6,35 +6,36 @@ using UnityEngine.UI.Extensions;
 
 public class Ally : Entity
 {
-    private Card[] _actionCards;
+    [SerializeField]
+    private EntityDeck _deck;
+    public EntityDeck deck => _deck;
     public override void SetUp()
     {
         base.SetUp();
-        var cards = new List<Card>();
-        foreach (var item in data.actions)
+        foreach (var cardData in data.actions)
         {
-            var card = Reference.entitySpawner.SpawnCard(item);
+            var card = Reference.entitySpawner.SpawnCard(cardData);
             card.data.action.owner = this;
             card.transform.SetParent(transform);
-            card.FlipUp();
-            cards.Add(card);
+            _deck.Add(card);
         }
-        _actionCards = cards.ToArray();
     }
 
     public override void UnSelect()
     {
         base.UnSelect();
         Reference.deck.UnSelect();
-        foreach (var item in _actionCards)
+        foreach (var card in _deck.cards)
         {
-            item.transform.SetParent(transform);
+            card.Disable();
+            card.container = null;
+            card.transform.SetParent(transform);
         }
     }
 
     public override void Select()
     {
         base.Select();
-        Reference.deck.PopulateEntitySkill(_actionCards);
+        Reference.deck.PopulateEntitySkill(_deck);
     }
 }

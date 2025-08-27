@@ -414,8 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 9639b3012eb9ee947a1345f607b35c2a, type: 2}
   container: {fileID: 0}
-  healthDisplay: {fileID: 0}
-  energyDisplay: {fileID: 3059893671748878826}
+  display: {fileID: 0}
   moveAction: {fileID: 11400000, guid: 462fa468dabb70249a824299729bbd76, type: 2}
 --- !u!114 &3059893671748878826
 MonoBehaviour:

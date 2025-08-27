@@ -21,6 +21,6 @@ public class Phantom : Entity
 
 	public override void UnSelect()
 	{
-
+		base.UnSelect();
 	}
 }

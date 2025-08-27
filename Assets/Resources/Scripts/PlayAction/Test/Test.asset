@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   area:
     size: 3
-    area: {fileID: 11400000, guid: 19eaf05158f98eb4893ba3b29560dffc, type: 2}
+    area: {fileID: 11400000, guid: 75fb548c98e697446b550b7f832f51f1, type: 2}
+    constraint: {fileID: 0}
   hoverArea:
     size: 1
     area: {fileID: 11400000, guid: 4751bab8a91008343b3602397190fa14, type: 2}
+    constraint: {fileID: 0}
   instant: 0
   owner: {fileID: 0}
   cost: 0
