@@ -57,9 +57,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
         if (isInspectable && eventData.button == PointerEventData.InputButton.Right)
         {
-            Reference.inspectSystem.Inspect(this);
+            Battle.inspectSystem.Inspect(this);
         }
-        
+
         if (isClickable && eventData.button == PointerEventData.InputButton.Left)
         {
             if (_data.action.owner.energy.value < _data.cost)
@@ -79,7 +79,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             ActionQueue.Stack(action, Vector2Int.one * 10000);
             return;
         }
-        Reference.player.SelectCard(this);
-        Reference.hoverSystem.SetAction(action, Vector2Int.one * 10000);
+        Battle.player.SelectCard(this);
+        Battle.hoverSystem.SetAction(action, Vector2Int.one * 10000);
     }
 }

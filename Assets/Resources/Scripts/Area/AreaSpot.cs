@@ -20,6 +20,6 @@ public class AreaSpot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void Select()
     {
-        Reference.hoverSystem.ActionProcessClick(_tile);
+        Battle.hoverSystem.ActionProcessClick(_tile);
     }
 }

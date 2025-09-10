@@ -8,7 +8,7 @@ public class AreaFullBoard : AreaData
     public override Vector2Int[] GetTile(Vector2Int center, int size, TileConstraint constraint)
     {
         List<Vector2Int> hitTiles = new List<Vector2Int>();
-        foreach (var item in TileManager.tiles.Keys)
+        foreach (var item in Battle.tileManager.GetAllTiles())
         {
             if (constraint != null && !constraint.Check(item)) continue;
             hitTiles.Add(item);

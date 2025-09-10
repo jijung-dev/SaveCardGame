@@ -9,7 +9,7 @@ public class EntitySelect : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Reference.inspectSystem.Inspect(entity);
+            Battle.inspectSystem.Inspect(entity);
         }
 
         if (eventData.button == PointerEventData.InputButton.Left)

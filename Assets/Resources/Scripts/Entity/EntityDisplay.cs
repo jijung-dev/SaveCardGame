@@ -14,7 +14,7 @@ public class EntityDisplay : MonoBehaviour
 		_data = data;
 		promptUpdate = true;
     }
-    void Update()
+    protected virtual void Update()
 	{
 		if (promptUpdate)
 		{
@@ -25,7 +25,7 @@ public class EntityDisplay : MonoBehaviour
 		}
 	}
 
-	void UpdateDisplay()
+	protected virtual void UpdateDisplay()
 	{
 		sprite.sprite = _data.sprite;
 	}

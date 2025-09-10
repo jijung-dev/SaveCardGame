@@ -1,18 +1,24 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using UnityEngine;
 
-public class TileManager
+public class TileManager : MonoBehaviour
 {
-    private static Dictionary<Vector2Int, GameTile> _tiles = new Dictionary<Vector2Int, GameTile>();
-    public static ReadOnlyDictionary<Vector2Int, GameTile> tiles = new ReadOnlyDictionary<Vector2Int, GameTile>(_tiles);
+    [SerializeField]
+    private TileSpawner _tileSpawner;
+    public TileSpawner tileSpawner => _tileSpawner;
 
-    public static bool HasTile(Vector2Int pos)
+    private Dictionary<Vector2Int, GameTile> _tiles = new Dictionary<Vector2Int, GameTile>();
+
+    public List<GameTile> GetAllTiles() => _tiles.Values.ToList();
+
+    public bool HasTile(Vector2Int pos)
     {
         return _tiles.ContainsKey(pos);
     }
 
-    public static GameTile GetTile(Vector2Int pos)
+    public GameTile GetTile(Vector2Int pos)
     {
         if (!_tiles.ContainsKey(pos))
         {
@@ -23,7 +29,7 @@ public class TileManager
         return _tiles[pos];
     }
 
-    public static void Add(GameTile tile)
+    public void Add(GameTile tile)
     {
         if (_tiles.ContainsValue(tile) || _tiles.ContainsKey(tile.celPosition))
         {
@@ -33,7 +39,7 @@ public class TileManager
 
         _tiles.Add(tile.celPosition, tile);
     }
-    public static void Remove(GameTile tile)
+    public void Remove(GameTile tile)
     {
         if (!_tiles.ContainsValue(tile) || !_tiles.ContainsKey(tile.celPosition))
         {

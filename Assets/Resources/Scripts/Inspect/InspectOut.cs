@@ -8,7 +8,7 @@ public class InspectOut : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left || eventData.button == PointerEventData.InputButton.Right)
         {
-            Reference.inspectSystem.Clear();
+            Battle.inspectSystem.Clear();
         }
     }
 }

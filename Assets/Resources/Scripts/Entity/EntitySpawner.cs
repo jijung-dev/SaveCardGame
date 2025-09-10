@@ -12,7 +12,7 @@ public class EntitySpawner : MonoBehaviour
     private GameObject cardBase;
     public void SetUp()
     {
-        var phantoms = EntityManager.GetAllPhantom();
+        var phantoms = Battle.entityManager.GetAllPhantom();
         for (int i = 0; i < phantoms.Length; i++)
         {
             Spawn(allyBase, phantoms[i].data, phantoms[i].celPosition);
@@ -21,7 +21,7 @@ public class EntitySpawner : MonoBehaviour
     }
     public Card SpawnCard(CardData data)
     {
-        var card = Instantiate(cardBase, Reference.deck.transform).GetComponent<Card>();
+        var card = Instantiate(cardBase, Battle.deck.transform).GetComponent<Card>();
         card.SetData(ScriptableObject.Instantiate(data));
         return card;
     }

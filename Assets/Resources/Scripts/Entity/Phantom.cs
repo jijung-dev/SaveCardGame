@@ -16,7 +16,7 @@ public class Phantom : Entity
 	public override void Select()
 	{
 		base.Select();
-		Reference.hoverSystem.SetAction(moveAction, celPosition);
+		Battle.hoverSystem.SetAction(moveAction, celPosition);
 	}
 
 	public override void UnSelect()

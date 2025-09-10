@@ -24,7 +24,7 @@ public class AreaCircle : AreaData
                 // Check if the center of the tile is within the circle
                 if (Vector3.Distance((Vector3Int)center, (Vector3Int)cellPos) - 0.5f <= size)
                 {
-                    if (!TileManager.HasTile(cellPos))
+                    if (!Battle.tileManager.HasTile(cellPos))
                         continue;
                     if (constraint == null || !constraint.Check(cellPos))
                         continue;

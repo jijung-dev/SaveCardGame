@@ -27,7 +27,7 @@ public class NodeManager
     {
         if (!_tiles.ContainsKey(pos))
         {
-            DebugExt.Log($"Getting tile from {pos} failed. Tile at {pos} doesn't exist", nameof(TileManager), LogType.Error);
+            DebugExt.Log($"Getting tile from {pos} failed. Tile at {pos} doesn't exist", nameof(Battle.tileManager), LogType.Error);
             return null;
         }
 
@@ -38,7 +38,7 @@ public class NodeManager
     {
         if (_tiles.ContainsValue(tile) || _tiles.ContainsKey(tile.celPosition))
         {
-            DebugExt.Log($"Adding {tile.name} to the list failed. Tile at {tile.celPosition} already exists", nameof(TileManager), LogType.Error);
+            DebugExt.Log($"Adding {tile.name} to the list failed. Tile at {tile.celPosition} already exists", nameof(Battle.tileManager), LogType.Error);
             return;
         }
 
@@ -48,7 +48,7 @@ public class NodeManager
     {
         if (!_tiles.ContainsValue(tile) || !_tiles.ContainsKey(tile.celPosition))
         {
-            DebugExt.Log($"Remove {tile.name} from the list failed. Tile at {tile.celPosition} doesn't exist", nameof(TileManager), LogType.Error);
+            DebugExt.Log($"Remove {tile.name} from the list failed. Tile at {tile.celPosition} doesn't exist", nameof(Battle.tileManager), LogType.Error);
             return;
         }
 

@@ -16,7 +16,7 @@ public class KeywordManager
     {
         if (!_keywords.ContainsKey(name))
         {
-            DebugExt.Log($"Getting tile from {name} failed. Tile at {name} doesn't exist", nameof(TileManager), LogType.Error);
+            DebugExt.Log($"Getting tile from {name} failed. Tile at {name} doesn't exist", nameof(Battle.tileManager), LogType.Error);
             return null;
         }
 

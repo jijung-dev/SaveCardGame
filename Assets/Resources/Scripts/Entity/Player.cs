@@ -24,7 +24,7 @@ public class Player : Entity
 	}
 	public void Discard()
 	{
-		Reference.deck.Discard(_card);
+		Battle.deck.Discard(_card);
 		UnSelectCard();
 	}
 	public override void Awake()

@@ -14,6 +14,7 @@ public abstract class Entity : MonoBehaviour
 	public Health health;
 	public Energy energy;
 	public EntityDisplay display;
+	public bool isSelected;
 
 	// //TEST:
 	// [Button(true)]
@@ -47,7 +48,7 @@ public abstract class Entity : MonoBehaviour
 	public virtual void Awake()
 	{
 		container = (Vector2Int)transform.position.RoundToInt();
-		EntityManager.Add(this);
+		Battle.entityManager.Add(this);
 
 		SetUp();
 	}
@@ -67,25 +68,30 @@ public abstract class Entity : MonoBehaviour
 	}
 	public virtual void Select()
 	{
+		isSelected = true;
 		GetComponent<SpriteRenderer>().color = Color.red;
-		Reference.hoverSystem.EntityProcessClick(this);
+		Battle.hoverSystem.EntityProcessClick(this);
 	}
 	public virtual void UnSelect()
 	{
+		isSelected = false;
 		GetComponent<SpriteRenderer>().color = Color.white;
 	}
 	public virtual void Destroy()
 	{
-		EntityManager.Remove(this);
+		Battle.entityManager.Remove(this);
 		if (energy != null)
 			Events.OnTurnEnd -= energy.RecoverEnergy;
-			
+
+		DebugExt.Log($"Destroying {gameObject.name}", this);
+		Battle.battleSystem.CheckBattleResult();
 		Destroy(this.gameObject);
 	}
+	public void Hit(int damage)
+	{
+		health.Hit(damage);
 
-	//Select Entity show actions
-
-	//Select action for AreaSelector
-
-	//Spawn areaSpot for AreaSelector
+		if (health.value <= 0)
+			Destroy();
+	}
 }

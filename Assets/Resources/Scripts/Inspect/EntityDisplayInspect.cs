@@ -35,9 +35,11 @@ public class EntityDisplayInspect : MonoBehaviour
 	}
 	public void OpenDeck()
 	{
+		if (_entity.isSelected) return;
+		
 		if (_entity is Ally ally)
 		{
-			Reference.inspectSystem.containerDisplay.Open(ally.deck);
+			Battle.inspectSystem.containerDisplay.Open(ally.deck);
 		}
 	}
 }

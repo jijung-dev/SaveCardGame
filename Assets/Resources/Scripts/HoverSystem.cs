@@ -27,7 +27,7 @@ public class HoverSystem : MonoBehaviour
 
             Vector2Int tilePos = (Vector2Int)mouseWorldPos.RoundToInt();
 
-            if (TileManager.HasTile(tilePos))
+            if (Battle.tileManager.HasTile(tilePos))
             {
                 return tilePos;
             }
@@ -104,7 +104,7 @@ public class HoverSystem : MonoBehaviour
     {
         UnSelectEntity();
         UnSelectAction();
-        Reference.player.UnSelectCard();
+        Battle.player.UnSelectCard();
         spawner.Clear();
     }
     public void EntityProcessClick(Entity entity)
@@ -119,13 +119,14 @@ public class HoverSystem : MonoBehaviour
     {
         if (spawner.HasTile(hoverTile.celPosition))
         {
-            ActionQueue.Stack(_currentAction, hoverTile.celPosition);
+            spawner.Clear();
+            _currentAction.owner.energy.Hit(_currentAction.cost);
+            _currentAction.owner.display.promptUpdate = true;
             if (_currentAction.owner is Player player)
             {
                 player.Discard();
             }
-            _currentAction.owner.energy.Hit(_currentAction.cost);
-            _currentAction.owner.display.promptUpdate = true;
+            ActionQueue.Stack(_currentAction, hoverTile.celPosition);
         }
 
         UnSelectAll();

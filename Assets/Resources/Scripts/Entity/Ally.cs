@@ -14,7 +14,7 @@ public class Ally : Entity
         base.SetUp();
         foreach (var cardData in data.actions)
         {
-            var card = Reference.entitySpawner.SpawnCard(cardData);
+            var card = Battle.entityManager.entitySpawner.SpawnCard(cardData);
             card.data.action.owner = this;
             card.transform.SetParent(transform);
             _deck.Add(card);
@@ -24,7 +24,7 @@ public class Ally : Entity
     public override void UnSelect()
     {
         base.UnSelect();
-        Reference.deck.UnSelect();
+        Battle.deck.UnSelect();
         foreach (var card in _deck.cards)
         {
             card.Disable();
@@ -36,6 +36,6 @@ public class Ally : Entity
     public override void Select()
     {
         base.Select();
-        Reference.deck.PopulateEntitySkill(_deck);
+        Battle.deck.PopulateEntitySkill(_deck);
     }
 }

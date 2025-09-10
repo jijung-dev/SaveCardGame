@@ -32,20 +32,21 @@ public class Deck : CardContainer
 
     public void PopulateAlly()
     {
-        List<Vector2Int> spawnableTile = Reference.battleSystem.data.allySpawnable.ToList();
+        List<Vector2Int> spawnableTile = Battle.battleSystem.data.allySpawnable.ToList();
         foreach (var item in data.allies)
         {
             GameTile tile = spawnableTile.RandomItem();
-            Reference.entitySpawner.SpawnPhantom(item, tile);
+            Battle.entityManager.entitySpawner.SpawnPhantom(item, tile);
             spawnableTile.Remove(tile.celPosition);
         }
     }
     public void PopulateEntitySkill(EntityDeck deck)
     {
-        for (int i = 0; i < deck.cards.Length; i++)
-        {    
+        var pullAmount = deck.Count;
+        for (int i = 0; i < pullAmount; i++)
+        {
             var card = deck.Pull();
-            
+
             actionPile.Add(card);
             card.Enable();
         }
@@ -63,8 +64,8 @@ public class Deck : CardContainer
     {
         foreach (var item in data.cards)
         {
-            var card = Reference.entitySpawner.SpawnCard(item);
-            card.data.action.owner = Reference.player;
+            var card = Battle.entityManager.entitySpawner.SpawnCard(item);
+            card.data.action.owner = Battle.player;
 
             drawPile.Add(card);
         }
@@ -79,7 +80,7 @@ public class Deck : CardContainer
         {
             if (drawPile.Count <= 0)
                 drawPile.Add(discardPile.PullAll());
-                
+
             var card = drawPile.Pull();
             handPile.Add(card);
 

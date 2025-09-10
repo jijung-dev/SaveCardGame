@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc317415208de94ab9ecb03a43a9dde, type: 3}
+  m_Name: TestBattle
+  m_EditorClassIdentifier: 
+  area:
+    size: 0
+    area: {fileID: 0}
+    constraint: {fileID: 0}
+  hoverArea:
+    size: 0
+    area: {fileID: 0}
+    constraint: {fileID: 0}
+  instant: 0
+  owner: {fileID: 0}
+  cost: 0
+  _data: {fileID: 11400000, guid: b07bc5cf1c981004c98805cdd86472ed, type: 2}
+  _deckData:
+    cards:
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    - {fileID: 11400000, guid: b2c875aa817637446a674ee1883fa8db, type: 2}
+    allies:
+    - {fileID: 11400000, guid: 9639b3012eb9ee947a1345f607b35c2a, type: 2}
